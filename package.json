@@ -7,8 +7,10 @@
   "author": "danny clarke",
   "license": "MIT",
   "scripts": {
+    "clean": "rm -rf public",
     "dev": "node server",
-    "build": "webpack -p --progress --colors"
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "start": "NODE_ENV=production node server"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
