@@ -21,11 +21,14 @@ module.exports = {
       title: 'challenge',
       template: 'app/index.ejs'
     }),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
-    })
+    }),
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
   ],
 
   module: {
