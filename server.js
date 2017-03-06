@@ -54,6 +54,6 @@ else {
   })
 }
 
-app.listen(3000, () => console.log(
+app.listen(process.env.PORT || 3000, () => console.log(
   "Server running, open http://localhost:3000 in your browser to view"
 )).on('error', console.log)
