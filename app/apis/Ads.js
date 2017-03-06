@@ -1,20 +1,21 @@
 'use strict'
 
 import reqwest from 'reqwest'
-import { compose, path } from 'ramda'
+import { compose, prop } from 'ramda'
 
-import AdActions from '../actions/Ads.js'
+import * as AdActions from '../actions/Ad.js'
 import Ad from '../tables/Ad.js'
 
-const ads = path('content', 'ads')
+const ads = compose(prop('ads'), x => JSON.parse(x), prop('response'))
 
-const success = compose(AdActions.loaded, Ad.fromArray, ads)
-
-export loadAll() {
+export function loadAll() {
   reqwest({
     url: '/api/v1/ads',
     method: 'get'
   }).
-    then(success).
+    then(resp => {
+      const as = ads(resp)
+      return AdActions.loaded(Ad.fromArray(as))
+    }).
     fail(AdActions.loadError)
 }

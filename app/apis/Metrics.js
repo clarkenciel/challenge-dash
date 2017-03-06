@@ -3,19 +3,19 @@
 import reqwest from 'reqwest'
 import { compose, prop } from 'ramda'
 
-import MetricActions from '../actions/Ads.js'
+import * as MetricActions from '../actions/Metric.js'
 import Metric from '../tables/Metric.js'
 
-const metrics = prop('content')
+const metrics = compose(x => JSON.parse(x), prop('response'))
 
-const success = compose(MetricActions.loaded, Metric.from, content)
-
-export byAdId(ids) {
+export function byAdIds(ids) {
   reqwest({
     url: '/api/v1/metrics',
     data: { remote_ids: ids },
     method: 'get'
+  }).then(resp => {
+    const ms = metrics(resp)
+    return MetricActions.loaded(Metric.from(ms))
   }).
-    then(success).
     fail(MetricActions.loadError)
 }

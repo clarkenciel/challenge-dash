@@ -7,13 +7,14 @@ const AdTypes = {
 }
 
 const MetricTypes = {
-  START_LOAD: 'metrics/start-load',
-  LOADED: 'metrics/loaded',
+  START_LOAD_BY_IDS: 'metrics/start-load',
+  LOADED_BY_IDS: 'metrics/loaded',
   LOAD_ERROR: 'metrics/load-error'
 }
 
 const ColumnSectionTypes = {
-  MOVE_COLUMN: 'colum-sections/move',
+  PIN: 'colum-sections/pin',
+  UNPIN: 'colum-sections/unpin',
 }
 
 export {
