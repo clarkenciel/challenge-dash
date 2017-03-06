@@ -49,9 +49,11 @@ if (isDeveloping) {
 else {
   app.use(express.static(path.join(__dirname, 'public')))
   app.get('*', (req, resp) => {
-    fs.createReadStream(path.join(__dirname, 'index.html')).
+    fs.createReadStream(path.join(__dirname, 'public', 'index.html')).
       pipe(resp)
   })
 }
 
-app.listen(3000)
+app.listen(3000, () => console.log(
+  "Server running, open http://localhost:3000 in your browser to view"
+)).on('error', console.log)
